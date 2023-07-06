@@ -1,0 +1,8 @@
+:root {
+  --navbar-width: 100px;
+  --screen-br: 30px;
+
+  --clr-bg-light: rgb(233, 144, 114);
+  --clr-txt-light: rgb(251, 217, 200);
+  --clr-txt-light-03: rgba(251, 217, 200, 0.3)
+}
