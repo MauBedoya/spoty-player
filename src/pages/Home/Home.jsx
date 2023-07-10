@@ -22,16 +22,19 @@ export default function Home() {
   useEffect(() => {
     const lastToken = sessionStorage.getItem("currentToken"); 
     const hash = window.location.hash;
+    window.location.hash = "";
     // validation help to not re-log-in on each page reload
-    if (lastToken || hash) {
+    if (!lastToken && hash) {
       const extractedToken = hash.split("&")[0].split("=")[1];
 
       sessionStorage.setItem("currentToken", extractedToken);
       setToken(extractedToken);
+    } else {
+      setToken(lastToken);
     }
   }, [])
 
-
+  
   return !token
     ? (<Login />)
     : (
