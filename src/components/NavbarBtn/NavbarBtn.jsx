@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./NavbarBtn.module.css";
 import { IconContext } from "react-icons";
 
@@ -15,9 +15,9 @@ export default function NavbarBtn(props) {
   return (
     <IconContext.Provider value={{ className: "icon-btn", size: "24px" }}>
       <Link to={route}>
-        <div className={`${styles.btn} ${styles[btnActive]}`}>
+        <div className={`${styles["btn"]} ${styles[btnActive]}`}>
           {icon}
-          <p className={styles.title}>{title}</p>
+          <p className={styles["title"]}>{title}</p>
         </div>
       </Link>
     </IconContext.Provider>

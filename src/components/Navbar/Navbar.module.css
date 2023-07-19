@@ -1,10 +1,13 @@
 .navbar {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 80px;
   align-items: center;
-  width: var(--navbar-width);
+  min-width: 0;
+  width: 0;
   height: 100%;
+  transition: all 0.3s ease;
 }
 .profile-img {
   width: 60px;
@@ -15,4 +18,14 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.navbar.is-active {
+  min-width: var(--navbar-width);
+}
+
+@media screen and (min-width: 1280px) {
+  .navbar {
+    min-width: var(--navbar-width);
+  }
 }
