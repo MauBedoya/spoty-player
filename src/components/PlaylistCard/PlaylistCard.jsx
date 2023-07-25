@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./PlaylistCard.module.css";
 
-export default function PlaylistCard({ img, name, tracks, owner }) {
+export default function PlaylistCard({ img, name, tracks, owner, play }) {
   return (
-    <div className={styles["card"]}>
+    <div 
+      className={styles["card"]}
+      onClick={play}>
       <img
         src={img}
         alt={`${name} playlist cover`}

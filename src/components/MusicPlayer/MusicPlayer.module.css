@@ -1,0 +1,146 @@
+.player {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--clr-bg-deep-dark);
+}
+.image {
+  margin: auto;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.shadow {
+  position: absolute;
+  object-fit: contain;
+  -webkit-filter: blur(12px);
+  filter: blur(12px);
+}
+.album-img {
+  width: 100%;
+  z-index: 1;
+}
+
+.data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+}
+.marquee {
+  padding-left: 100%;
+  width: fit-content;
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.name {
+  white-space: nowrap;
+  text-align: left;
+  width: 100%;
+  display: block;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+.author {
+  color: var(--clr-text-light-sec);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.playing-info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.progress-bar {
+  --bar-bg: var(--clr-bg-light);
+  --seek-bar-clr: var(--clr-txt-light-prim);
+  --seek-bar-width: 0;
+  
+  position: relative;
+  width: 200px;
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 10px;
+  height: 8px;
+  outline: none;
+}
+.progress-bar::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px 0 0 10px;
+  width: var(--seek-bar-width);
+  content: "";
+  height: 8px;
+  background: var(--seek-bar-clr);
+  cursor: pointer;
+}
+/* progressbar ball */
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background: var(--seek-bar-clr);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.progress-bar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+/* Firefox progress-bar */
+.progress-bar::-moz-range-progress {
+  border-radius: 10px 0 0 10px;
+  background: var(--seek-before-clr);
+  height: 8px;
+}
+/* Firefox progressbar ball */
+.progress-bar::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: transparent;
+  background: var(--seek-before-clr);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.progress-bar:active::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.buttons > button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 35px;
+  color: var(--clr-txt-light-prim);
+}

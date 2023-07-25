@@ -7,7 +7,7 @@ const scopes = ["user-library-read", "playlist-read-private"];
 // Spotify Endpoints
 export const api = {
   CURRENT_USER: "https://api.spotify.com/v1/me",
-  USER_PLAYLISTS: "https://api.spotify.com/v1/me/playlists?limit=15&offset=0"
+  USER_PLAYLISTS: "https://api.spotify.com/v1/me/playlists?limit=15&offset=0",
 }
 
 // log-in endpoint to OAuth 2.0

@@ -1,5 +1,5 @@
 .fav-grid {
   display: grid;
   place-content: center;
-  color: var(--clr-txt-light);
+  color: var(--clr-txt-light-prim);
 }

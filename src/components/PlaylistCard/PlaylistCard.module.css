@@ -1,4 +1,5 @@
 .card {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -23,6 +24,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: baseline;
+  /* banner */
 }
 .name {
   text-align: left;
@@ -34,9 +36,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.tracks {
-  color: #a7a7a7;
-}
-.owner {
-  color: #a7a7a7;
+.tracks, .owner {
+  color: var(--clr-text-light-sec);
 }

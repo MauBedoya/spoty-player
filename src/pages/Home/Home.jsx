@@ -29,7 +29,8 @@ export default function Home() {
   }, []);
 
   // toggle the "is-active" class to animate navbar and button when it's pressed
-  const toggleMenu = () => {
+  const toggleMenu = (e) => {
+    console.log(e.target);
     menuState === ""
       ? setMenuState("is-active")
       : setMenuState("")
