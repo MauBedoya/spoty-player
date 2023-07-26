@@ -8,11 +8,16 @@
   background: var(--clr-bg-deep-dark);
 }
 .image {
+  height: 260px;
+  width: 260px;
+  background-image: url("/albumPlaceholder.png");
+  background-size: cover;
   margin: auto;
   position: relative;
   display: grid;
   place-items: center;
 }
+
 .shadow {
   position: absolute;
   object-fit: contain;
