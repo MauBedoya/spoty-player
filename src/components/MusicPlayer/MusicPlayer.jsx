@@ -5,7 +5,7 @@ import { BsPlayCircleFill, BsPauseCircleFill } from "react-icons/bs"
 import styles from "./MusicPlayer.module.css";
 
 export default function MusicPlayer(props) {
-  const { imgLink, title, author, audioSrc } = props;
+  const { imgLink, title, author, audioSrc, changeTrack } = props;
   //toDo: maybe is useful to improve the "preview_url: null": https://github.com/spotify/web-api/issues/148
 
   // state of play/pause button
@@ -22,14 +22,17 @@ export default function MusicPlayer(props) {
 
   // extract track duration and current time
   useEffect(() => {
-    const roundedDuration = Math.floor(audioPlayer.current.duration + 1)
-    setDuration(roundedDuration);
-
-    progressBar.current.max = roundedDuration;
-
+    console.log(audioSrc);
+    if (audioSrc) {
+      const roundedDuration = Math.floor(audioPlayer.current.duration + 1)
+      setDuration(roundedDuration);
+  
+      progressBar.current.max = roundedDuration;
+    }
   }, [
     audioPlayer?.current?.loadedmetadata,
-    audioPlayer?.current?.readyState
+    audioPlayer?.current?.readyState,
+    // audioSrc
   ])
 
   // calculate and format the time of duration
@@ -47,15 +50,21 @@ export default function MusicPlayer(props) {
   }
 
   // toggle button and play or pause the audio
-  const togglePlay = () => {
-    setPlaying(!playing);
-    if (playing) {
-      audioPlayer.current.pause();
-      // pause animation
-      cancelAnimationFrame(animationRef.current);
+  const togglePlay = (e) => {
+    if (e.target.matches(".playPause-btn *")) {
+      setPlaying(!playing);
+      if (playing) {
+        audioPlayer.current.pause();
+        // pause animation
+        cancelAnimationFrame(animationRef.current);
+      } else {
+        audioPlayer.current.play();
+        animationRef.current = requestAnimationFrame(playingAnimation);
+      }
     } else {
-      audioPlayer.current.play();
-      animationRef.current = requestAnimationFrame(playingAnimation);
+      setPlaying(false);
+      audioPlayer.current.pause();
+      cancelAnimationFrame(animationRef.current);
     }
   }
 
@@ -73,7 +82,6 @@ export default function MusicPlayer(props) {
 
   // animate the progress bar while playing
   const playingAnimation = () => {
-    console.log("animando");
     progressBar.current.value = audioPlayer.current.currentTime;
     changePlayerCurrentTime();
     // need to call again to animate the progress
@@ -116,17 +124,28 @@ export default function MusicPlayer(props) {
               </div>
         }
         <div className={styles["buttons"]}>
-          <button><BiSkipPrevious /></button>
-          <button onClick={togglePlay}>
+          <button 
+            className="prev-btn" 
+            onClick={(e) => {
+              changeTrack(e);
+              togglePlay(e);
+            }}
+          ><BiSkipPrevious /></button>
+          <button className="playPause-btn" onClick={togglePlay}>
             {
               playing
                 ? <BsPauseCircleFill />
                 : <BsPlayCircleFill />
             }
           </button>
-          <button><BiSkipNext /></button>
+          <button 
+            className="next-btn" 
+            onClick={(e) => {
+              changeTrack(e);
+              togglePlay(e);
+            }}
+          ><BiSkipNext /></button>
         </div>
-        
       </div>
     </div>
   )

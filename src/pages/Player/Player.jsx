@@ -29,11 +29,16 @@ export default function Player() {
   }, [location.state]);
 
   // toDo: prev and next track 
-  // const changeTrack = () => {
-  //   setCurrentIndex(currentIndex + 1)
-  //   setCurrentTrack(tracks[currentIndex])
-  // }
-  
+  const changeTrack = (e) => {
+    if (currentIndex < tracks.length - 1 && e.target.matches(".next-btn *")) {
+      setCurrentTrack(tracks[currentIndex + 1].track);
+      setCurrentIndex(currentIndex + 1);
+    } else if (currentIndex >= 1 && e.target.matches(".prev-btn *")) {
+      setCurrentTrack(tracks[currentIndex - 1].track);
+      setCurrentIndex(currentIndex - 1);
+    }
+  }
+
   return (
     <div className={styles["player-grid"]}>
       {
@@ -45,6 +50,7 @@ export default function Player() {
             title={currentTrack.name}
             author={currentTrack.artists}
             audioSrc={currentTrack.preview_url}
+            changeTrack={changeTrack}
           />
       }
     </div>
