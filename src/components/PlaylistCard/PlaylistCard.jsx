@@ -1,6 +1,5 @@
 import React from "react";
 import { BsPlayCircleFill } from "react-icons/bs";
-import CardBtn from "../CardBtn/CardBtn";
 
 import styles from "./PlaylistCard.module.css";
 
