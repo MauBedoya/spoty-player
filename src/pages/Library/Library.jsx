@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api, spotifyApi } from "../../helpers/spotify";
 import styles from "./Library.module.css";
 import PlaylistCard from "../../components/PlaylistCard/PlaylistCard";
@@ -8,6 +9,7 @@ export default function Library() {
   const [playlists, setPlaylists] = useState([]);
   const [nextPage, setNextPage] = useState();
   const [loader, setLoader] = useState(true);
+  const navigate = useNavigate();
 
   // consume first 15 playlists
   useEffect(() => {
@@ -33,9 +35,19 @@ export default function Library() {
     }
   };
 
+  // send the playlist id through the url to the player page
+  const playPlaylist = (id) => {
+    navigate("/player", {
+      state: {
+        id
+      }
+    })
+  }
+
   return (
     <div className={styles["fluid-grid"]} onScroll={handleScroll}>
       {playlists.map((el, i) => {
+        // console.log(el);
         return (
           <PlaylistCard
             name={el.name}
@@ -43,6 +55,7 @@ export default function Library() {
             tracks={el.tracks.total}
             owner={el.owner.display_name}
             key={i}
+            play={() => playPlaylist(el.id)}
           />
         );
       })}

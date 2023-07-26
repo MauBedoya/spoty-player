@@ -19,7 +19,7 @@
   flex-direction: column;
   gap: 10px;
   max-width: 300px;
-  color: var(--clr-txt-light);
+  color: var(--clr-txt-light-prim);
 }
 .information span {
   font-weight: bold;

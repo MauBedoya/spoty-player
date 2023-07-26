@@ -2,8 +2,11 @@
   --navbar-width: 100px;
   --screen-br: 30px;
 
-  --clr-bg-dark: #1e2022; 
+  --clr-bg-active: #1e2022;
+  --clr-bg-dark: #1e2022;
+  --clr-bg-deep-dark: #181818;
   --clr-bg-light: #2e3239;
-  --clr-txt-light: #f0f0f0;
-  --clr-txt-light-03: #1e2022;
+  
+  --clr-txt-light-prim: #f0f0f0;
+  --clr-text-light-sec: #a7a7a7;
 }
