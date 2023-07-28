@@ -22,18 +22,15 @@ export default function MusicPlayer(props) {
 
   // extract track duration and current time
   useEffect(() => {
-    console.log(audioSrc);
     if (audioSrc) {
-      const roundedDuration = Math.floor(audioPlayer.current.duration + 1)
-      setDuration(roundedDuration);
-  
-      progressBar.current.max = roundedDuration;
+      audioPlayer.current.load(); // charge audio to obtain metadata
+      audioPlayer.current.addEventListener("loadedmetadata", () => {
+        const roundedDuration = Math.floor(audioPlayer.current.duration + 1);
+        setDuration(roundedDuration);
+        progressBar.current.max = roundedDuration;
+      });
     }
-  }, [
-    audioPlayer?.current?.loadedmetadata,
-    audioPlayer?.current?.readyState,
-    // audioSrc
-  ])
+  }, [audioSrc]);
 
   // calculate and format the time of duration
   const calculateTime = (secs) => {
