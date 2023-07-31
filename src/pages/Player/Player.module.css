@@ -3,3 +3,9 @@
   place-content: center;
   color: var(--clr-txt-light-prim);
 }
+.loader-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
