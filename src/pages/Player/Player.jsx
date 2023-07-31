@@ -44,7 +44,7 @@ export default function Player() {
       {
         // set loader while currentTrack state is updated after first render
         loader
-          ? <Loader />
+          ? <div className={styles["loader-message"]}><Loader /><p>Select a playlist to start playing</p></div>
           : <MusicPlayer 
             imgLink={currentTrack.album.images[0]?.url}
             title={currentTrack.name}

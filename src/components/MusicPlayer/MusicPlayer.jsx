@@ -22,18 +22,15 @@ export default function MusicPlayer(props) {
 
   // extract track duration and current time
   useEffect(() => {
-    console.log(audioSrc);
     if (audioSrc) {
-      const roundedDuration = Math.floor(audioPlayer.current.duration + 1)
-      setDuration(roundedDuration);
-  
-      progressBar.current.max = roundedDuration;
+      audioPlayer.current.load(); // charge audio to obtain metadata
+      audioPlayer.current.addEventListener("loadedmetadata", () => {
+        const roundedDuration = Math.floor(audioPlayer.current.duration + 1);
+        setDuration(roundedDuration);
+        progressBar.current.max = roundedDuration;
+      });
     }
-  }, [
-    audioPlayer?.current?.loadedmetadata,
-    audioPlayer?.current?.readyState,
-    // audioSrc
-  ])
+  }, [audioSrc]);
 
   // calculate and format the time of duration
   const calculateTime = (secs) => {
@@ -51,7 +48,7 @@ export default function MusicPlayer(props) {
 
   // toggle button and play or pause the audio
   const togglePlay = (e) => {
-    if (e.target.matches(".playPause-btn *")) {
+    if (e.target.matches(".playPause-btn *") && audioSrc) {
       setPlaying(!playing);
       if (playing) {
         audioPlayer.current.pause();
@@ -66,6 +63,13 @@ export default function MusicPlayer(props) {
       audioPlayer.current.pause();
       cancelAnimationFrame(animationRef.current);
     }
+  }
+
+  // reset player current time at change track
+  const resetCurrentTime = () => {
+    progressBar.current.value = 0;
+    progressBar.current.style.setProperty("--seek-bar-width", `0%`);
+    setCurrentTime(progressBar.current.value)
   }
 
   // to don't repeat
@@ -129,6 +133,7 @@ export default function MusicPlayer(props) {
             onClick={(e) => {
               changeTrack(e);
               togglePlay(e);
+              resetCurrentTime();
             }}
           ><BiSkipPrevious /></button>
           <button className="playPause-btn" onClick={togglePlay}>
@@ -143,6 +148,7 @@ export default function MusicPlayer(props) {
             onClick={(e) => {
               changeTrack(e);
               togglePlay(e);
+              resetCurrentTime();
             }}
           ><BiSkipNext /></button>
         </div>
