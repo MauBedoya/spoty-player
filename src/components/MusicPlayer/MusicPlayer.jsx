@@ -48,7 +48,7 @@ export default function MusicPlayer(props) {
 
   // toggle button and play or pause the audio
   const togglePlay = (e) => {
-    if (e.target.matches(".playPause-btn *")) {
+    if (e.target.matches(".playPause-btn *") && audioSrc) {
       setPlaying(!playing);
       if (playing) {
         audioPlayer.current.pause();
@@ -63,6 +63,13 @@ export default function MusicPlayer(props) {
       audioPlayer.current.pause();
       cancelAnimationFrame(animationRef.current);
     }
+  }
+
+  // reset player current time at change track
+  const resetCurrentTime = () => {
+    progressBar.current.value = 0;
+    progressBar.current.style.setProperty("--seek-bar-width", `0%`);
+    setCurrentTime(progressBar.current.value)
   }
 
   // to don't repeat
@@ -126,6 +133,7 @@ export default function MusicPlayer(props) {
             onClick={(e) => {
               changeTrack(e);
               togglePlay(e);
+              resetCurrentTime();
             }}
           ><BiSkipPrevious /></button>
           <button className="playPause-btn" onClick={togglePlay}>
@@ -140,6 +148,7 @@ export default function MusicPlayer(props) {
             onClick={(e) => {
               changeTrack(e);
               togglePlay(e);
+              resetCurrentTime();
             }}
           ><BiSkipNext /></button>
         </div>
